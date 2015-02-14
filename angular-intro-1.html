@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Angular 101</title>
+
+    <link rel="stylesheet" href="css/angular-intro.css">
+  </head>
+  <!--
+    Our HTML needs to tell Angular which module and which
+    controller to run. ng-app tells Angular which module.
+    ng-controller tells it which controller. The 'as' bit
+    tells Angular to give our view access to the controller
+    via a variable 'm'. We could name 'm' whatever we want.
+  -->
+  <body ng-app="intro" ng-controller="IntroCtrl as m">
+
+    <main ng-cloak>
+      <h1>Invoice for {{m.invoice.company}}</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Description
+            </th>
+            <th>
+              Cost
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="line in m.invoice.lineItems">
+            <td>
+              {{line.description}}
+            </td>
+            <td>
+              {{line.cost}}
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>
+              Total
+            </td>
+            <td>
+              {{m.invoice.total()}}
+            </td>
+          </tr>
+        </tfoot>
+      </ul>
+
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-animate.min.js"></script>
+
+    <script src="js/intro-controller.js"></script>
+
+  </body>
+</html>

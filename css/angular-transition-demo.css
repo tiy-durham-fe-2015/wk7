@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.4em;
+}
+
+/*
+  Hide ng-cloak, so that there isn't a flicker...
+*/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.detail-container {
+  opacity: 1;
+  padding: 1.4em;
+  border: 1px solid gray;
+}
+
+/* The detail-container is being hidden */
+.detail-container.ng-hide-add.ng-hide-add-active {
+  transition: opacity linear 0.1s;
+}
+
+/* The detail-container is being shown */
+.detail-container.ng-hide-remove.ng-hide-remove-active {
+  transition: opacity linear 0.25s;
+}
+
+/* The detail-container is hidden */
+.detail-container.ng-hide {
+  opacity: 0;
+}

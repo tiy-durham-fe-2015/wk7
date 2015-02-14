@@ -1,0 +1,23 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.4em;
+}
+
+h1 {
+  line-height: 1.3em;
+}
+
+td, th {
+  padding: 0.5em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+
+/*
+  Hide ng-cloak, so that there isn't a flicker...
+*/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

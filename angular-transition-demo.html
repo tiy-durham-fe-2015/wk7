@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Angular 101</title>
+
+    <link rel="stylesheet" href="css/angular-transition-demo.css">
+  </head>
+  <body>
+
+    <div ng-app="transitionModule" ng-ctrl="AngularTransitionCtrl as trx" ng-cloak>
+      <label>
+        <input type="checkbox" ng-model="trx.showDetail">
+        Show detail
+      </label>
+
+      <div class="detail-container" ng-show="trx.showDetail">
+        <h1>This is the detail</h1>
+        <p>
+          It shows or hides based on whether the checkbox
+          is checked. (Well, really based on the value of
+          the model to which the checkbox is bound.)
+        </p>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-animate.min.js"></script>
+
+    <script src="js/angular-transition-controller.js"></script>
+
+  </body>
+</html>
