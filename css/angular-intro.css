@@ -15,6 +15,10 @@ tfoot {
   font-weight: bold;
 }
 
+input, button {
+  font-size: inherit;
+}
+
 /*
   Hide ng-cloak, so that there isn't a flicker...
 */
