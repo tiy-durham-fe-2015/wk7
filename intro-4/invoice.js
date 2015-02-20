@@ -8,11 +8,11 @@ app.factory('Invoice', function () {
   // Here, we define our Invoice constructor
   function Invoice (spec) {
     spec = spec || {};
-    
+
     var self = {
       company: spec.company || 'Unknown Company',
 
-      lineItems: spec.lineItems || [],
+      lineItems: spec.lineItems || [LineItem()],
 
       get total () {
         return self.lineItems.reduce(function (total, item) {
@@ -20,13 +20,11 @@ app.factory('Invoice', function () {
         }, 0);
       },
 
-      // Really, we probably should make a LineItem class,
-      // too, but I'm just being lazy and not doing it...
       addLineItem: function (description, cost) {
-        self.lineItems.push({
-          description: description || 'Enter description',
-          cost: cost || 0
-        });
+        self.lineItems.push(LineItem({
+          description: description,
+          cost: cost
+        }));
       },
 
       deleteLineItem: function (item) {
@@ -35,9 +33,26 @@ app.factory('Invoice', function () {
         if (index >= 0) {
           self.lineItems.splice(index, 1);
         }
+
+        // Don't allow 0 line items
+        if (!self.lineItems.length) {
+          self.lineItems.push(LineItem());
+        }
       }
     };
 
     return self;
   }
+
+  // The LineItem class represents a single line item in
+  // an invoice
+  function LineItem (spec) {
+    spec = spec || {};
+
+    return {
+      description: spec.description || 'Enter description',
+      cost: spec.cost || 0
+    };
+  }
+
 });

@@ -15,7 +15,6 @@ app.controller('InvoicesCtrl', ['Invoice', function(Invoice) {
 
   self.createInvoice = function () {
     var newInvoice = Invoice();
-    self.all.push(newInvoice);
     self.current = newInvoice;
   };
 
@@ -28,6 +27,11 @@ app.controller('InvoicesCtrl', ['Invoice', function(Invoice) {
   };
 
   self.doneEditing = function () {
+    self.all.push(self.current);
+    self.cancelEditing();
+  };
+
+  self.cancelEditing = function () {
     self.current = undefined;
   };
 

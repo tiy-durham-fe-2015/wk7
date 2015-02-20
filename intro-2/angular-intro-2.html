@@ -44,7 +44,14 @@
             <td>
               <!--
                 Here's another handy directive: ng-click
-                You can probably guess what it does.
+                You can probably guess what it does. By
+                the way, events (such as ng-click) have
+                access to the event object via $event...
+
+                So, if we wanted to cancel our event, we
+                could pass it into our method:
+                
+                m.deleteLineItem(line, $event)
               -->
               <button ng-click="m.deleteLineItem(line)">X</button>
             </td>

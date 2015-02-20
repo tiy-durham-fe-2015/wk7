@@ -50,24 +50,12 @@
           <tbody>
             <tr ng-repeat="line in invoices.current.lineItems">
               <td>
-                <!--
-                  OOOhhh. New things.
-                  ng-model. What's it do? Glad you asked.
-                  It is an Angular directive... more on directives
-                  later. But basically, you can think of ng-model
-                  as saying: "Hey, Angular. Bind the value of
-                  line.description to this input field. Thanks!"
-                -->
                 <input ng-model="line.description">
               </td>
               <td>
                 <input type="number" ng-model="line.cost">
               </td>
               <td>
-                <!--
-                  Here's another handy directive: ng-click
-                  You can probably guess what it does.
-                -->
                 <button ng-click="invoices.current.deleteLineItem(line)">X</button>
               </td>
             </tr>
@@ -78,7 +66,7 @@
                 Total
               </td>
               <td>
-                {{invoices.current.total()}}
+                {{invoices.current.total}}
               </td>
               <td>
                 <button ng-click="invoices.current.addLineItem()">+</button>
@@ -88,6 +76,7 @@
         </table>
 
         <button ng-click="invoices.doneEditing()">Done</button>
+        <button ng-click="invoices.cancelEditing()">Cancel</button>
       </div>
     </main>
 
@@ -98,7 +87,6 @@
     <script src="app.js"></script>
     <script src="invoice.js"></script>
     <script src="invoices-controller.js"></script>
-    <script src="invoice-controller.js"></script>
 
   </body>
 </html>
