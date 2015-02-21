@@ -7,27 +7,21 @@
 // look deep within its complicated, dark little heart and
 // give us the thing (object, function, string, whatever) that
 // was registered as 'Invoice' (see invoice.js for details).
-app.controller('InvoicesCtrl', ['Invoice', function(Invoice) {
+app.controller('InvoicesCtrl', ['Invoice', 'invoiceStore', function(Invoice, invoiceStore) {
   var self = this;
 
-  self.all = [];
+  self.all = invoiceStore.all;
   self.current = undefined;
+
+  self.removeInvoice = invoiceStore.remove;
 
   self.createInvoice = function () {
     var newInvoice = Invoice();
     self.current = newInvoice;
   };
 
-  self.removeInvoice = function (item) {
-    var index = self.all.indexOf(item);
-
-    if (index >= 0) {
-      self.all.splice(index, 1);
-    }
-  };
-
   self.doneEditing = function () {
-    self.all.push(self.current);
+    invoiceStore.add(self.current);
     self.cancelEditing();
   };
 

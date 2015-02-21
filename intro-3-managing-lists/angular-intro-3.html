@@ -14,12 +14,12 @@
     <main ng-cloak>
       <div ng-if="!invoices.current">
         <table>
-          <tr ng-repeat="invoice in invoices.all">
+          <tr ng-repeat="invoice in invoices.all()">
             <td>
               {{invoice.company}}
             </td>
             <td>
-              {{invoice.total}}
+              {{invoice.total | currency}}
             </td>
             <td>
               <button ng-click="invoices.removeInvoice(invoice)">X</button>
@@ -33,59 +33,60 @@
         ng-if only adds the related HTML if the condition is truthy
       -->
       <div ng-if="invoices.current">
-        <h1>Invoice for <input ng-model="invoices.current.company"></h1>
+        <form ng-submit="invoices.current.addLineItem()">
+          <h1>Invoice for <input ng-model="invoices.current.company"></h1>
 
-        <table>
-          <thead>
-            <tr>
-              <th>
-                Description
-              </th>
-              <th colspan="2">
-                Cost
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="line in invoices.current.lineItems">
-              <td>
-                <!--
-                  OOOhhh. New things.
-                  ng-model. What's it do? Glad you asked.
-                  It is an Angular directive... more on directives
-                  later. But basically, you can think of ng-model
-                  as saying: "Hey, Angular. Bind the value of
-                  line.description to this input field. Thanks!"
-                -->
-                <input ng-model="line.description">
-              </td>
-              <td>
-                <input type="number" ng-model="line.cost">
-              </td>
-              <td>
-                <!--
-                  Here's another handy directive: ng-click
-                  You can probably guess what it does.
-                -->
-                <button ng-click="invoices.deleteLineItem(line)">X</button>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>
-                Total
-              </td>
-              <td>
-                {{invoices.current.total}}
-              </td>
-              <td>
-                <button ng-click="invoices.addLineItem()">+</button>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Description
+                </th>
+                <th colspan="2">
+                  Cost
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="line in invoices.current.lineItems">
+                <td>
+                  <!--
+                    OOOhhh. New things.
+                    ng-model. What's it do? Glad you asked.
+                    It is an Angular directive... more on directives
+                    later. But basically, you can think of ng-model
+                    as saying: "Hey, Angular. Bind the value of
+                    line.description to this input field. Thanks!"
+                  -->
+                  <input ng-model="line.description">
+                </td>
+                <td>
+                  <input type="number" ng-model="line.cost" step="any">
+                </td>
+                <td>
+                  <!--
+                    Here's another handy directive: ng-click
+                    You can probably guess what it does.
+                  -->
+                  <button type="button" ng-click="invoices.deleteLineItem(line)">X</button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>
+                  Total
+                </td>
+                <td>
+                  {{invoices.current.total | currency}}
+                </td>
+                <td>
+                  <button ng-click="invoices.addLineItem()">+</button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </form>
         <button ng-click="invoices.doneEditing()">Done</button>
       </div>
     </main>
