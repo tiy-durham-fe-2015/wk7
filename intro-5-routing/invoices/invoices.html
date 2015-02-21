@@ -1,0 +1,62 @@
+<div ng-if="!vm.current">
+  <table>
+    <tr ng-repeat="invoice in vm.all">
+      <td>
+        {{invoice.company}}
+      </td>
+      <td>
+        {{invoice.total}}
+      </td>
+      <td>
+        <button ng-click="vm.removeInvoice(invoice)">X</button>
+      </td>
+    </tr>
+  </table>
+  <button ng-click="vm.createInvoice()">+ New Invoice</button>
+</div>
+
+<div ng-if="vm.current">
+  <h1>Invoice for <input ng-model="vm.current.company"></h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Description
+        </th>
+        <th colspan="2">
+          Cost
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="line in vm.current.lineItems">
+        <td>
+          <input ng-model="line.description">
+        </td>
+        <td>
+          <input type="number" ng-model="line.cost">
+        </td>
+        <td>
+          <button ng-click="vm.current.deleteLineItem(line)">X</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          Total
+        </td>
+        <td>
+          {{vm.current.total}}
+        </td>
+        <td>
+          <button ng-click="vm.current.addLineItem()">+</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <button ng-click="vm.doneEditing()">Done</button>
+  <button ng-click="vm.cancelEditing()">Cancel</button>
+</div>

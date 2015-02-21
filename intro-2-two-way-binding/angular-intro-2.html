@@ -14,63 +14,65 @@
     <main ng-cloak>
       <h1>Invoice for {{m.invoice.company}}</h1>
 
-      <table>
-        <thead>
-          <tr>
-            <th>
-              Description
-            </th>
-            <th colspan="2">
-              Cost
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="line in m.invoice.lineItems">
-            <td>
-              <!--
-                OOOhhh. New things.
-                ng-model. What's it do? Glad you asked.
-                It is an Angular directive... more on directives
-                later. But basically, you can think of ng-model
-                as saying: "Hey, Angular. Bind the value of
-                line.description to this input field. Thanks!"
-              -->
-              <input ng-model="line.description">
-            </td>
-            <td>
-              <input type="number" ng-model="line.cost">
-            </td>
-            <td>
-              <!--
-                Here's another handy directive: ng-click
-                You can probably guess what it does. By
-                the way, events (such as ng-click) have
-                access to the event object via $event...
+      <form ng-submit="m.addLineItem()">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Description
+              </th>
+              <th colspan="2">
+                Cost
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="line in m.invoice.lineItems">
+              <td>
+                <!--
+                  OOOhhh. New things.
+                  ng-model. What's it do? Glad you asked.
+                  It is an Angular directive... more on directives
+                  later. But basically, you can think of ng-model
+                  as saying: "Hey, Angular. Bind the value of
+                  line.description to this input field. Thanks!"
+                -->
+                <input ng-model="line.description">
+              </td>
+              <td>
+                <input type="number" ng-model="line.cost" step="any">
+              </td>
+              <td>
+                <!--
+                  Here's another handy directive: ng-click
+                  You can probably guess what it does. By
+                  the way, events (such as ng-click) have
+                  access to the event object via $event...
 
-                So, if we wanted to cancel our event, we
-                could pass it into our method:
-                
-                m.deleteLineItem(line, $event)
-              -->
-              <button ng-click="m.deleteLineItem(line)">X</button>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>
-              Total
-            </td>
-            <td>
-              {{m.invoice.total}}
-            </td>
-            <td>
-              <button ng-click="m.addLineItem()">+</button>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+                  So, if we wanted to cancel our event, we
+                  could pass it into our method:
+
+                  m.deleteLineItem(line, $event)
+                -->
+                <button type="button" ng-click="m.deleteLineItem(line)">X</button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                Total
+              </td>
+              <td>
+                {{m.invoice.total | currency}}
+              </td>
+              <td>
+                <button type="submit">+</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </form>
 
     </main>
 
