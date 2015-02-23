@@ -14,8 +14,8 @@
     <main ng-cloak>
       <div ng-if="!invoices.current">
         <table>
-          <tr ng-repeat="invoice in invoices.all()">
-            <td>
+          <tr ng-repeat="invoice in invoices.all">
+            <td ng-click="invoices.editInvoice(invoice)">
               {{invoice.company}}
             </td>
             <td>

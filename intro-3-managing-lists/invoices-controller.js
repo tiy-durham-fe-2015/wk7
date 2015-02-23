@@ -24,6 +24,10 @@ angular.module('app', []).controller('InvoicesCtrl', function() {
     self.current = newInvoice;
   };
 
+  self.editInvoice = function (item) {
+    self.current = item;
+  };
+
   self.removeInvoice = function (item) {
     var index = self.all.indexOf(item);
 
