@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bikes</title>
+    <link rel="stylesheet" href="../css/angular-intro.css">
+  </head>
+  <body ng-app="app" ng-controller="BikesCtrl as vm">
+
+    <div class="main-content" ng-cloak>
+      <div class="bike-promos" ng-if="vm.showPromos">
+        <h1>Bikes For Sale!!!!</h1>
+
+        <ul class="bikes-list">
+          <li ng-repeat="bike in vm.bikes">
+            <span class="bike-name">{{bike.name}}</span>
+            <strong class="bike-price">{{bike.price | currency}}</strong>
+
+            <ul class="bike-accessories">
+              <li ng-repeat="accessory in bike.accessories">
+                <span class="accessory-name">{{accessory.name}}</span>
+                <strong class="accessory-price">{{accessory.price | currency}}</strong>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <button ng-click="vm.editBikes(true)">+ Edit Bikes</button>
+      </div>
+
+      <div class="bike-edit" ng-if="!vm.showPromos">
+        <h1>Edit Bikes 'n Stuff</h1>
+
+        <ul class="bikes-list">
+          <li ng-repeat="bike in vm.bikes">
+            <input ng-model="bike.name">
+            <input ng-model="bike.price" type="number" step="all">
+
+            <ul class="bike-accessories">
+              <li ng-repeat="accessory in bike.accessories">
+                <input ng-model="accessory.name">
+                <input ng-model="accessory.price" type="number" step="all">
+              </li>
+            </ul>
+
+            <button ng-click="bike.addAccessory()">+ New Accessory</button>
+          </li>
+        </ul>
+
+        <button ng-click="vm.addBike()">+ New Bike</button>
+
+        <button ng-click="vm.editBikes(false)">+ Show Promos</button>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script src="bikes-controller.js"></script>
+  </body>
+</html>
