@@ -12,11 +12,15 @@
         <h1>Bikes For Sale!!!!</h1>
 
         <ul class="bikes-list">
+          <!-- Loop through each of our bikes and create an li
+           to represent it -->
           <li ng-repeat="bike in vm.bikes">
             <span class="bike-name">{{bike.name}}</span>
             <strong class="bike-price">{{bike.price | currency}}</strong>
 
             <ul class="bike-accessories">
+              <!-- Loop through each of our bike's accessories and
+              create an li to represent it -->
               <li ng-repeat="accessory in bike.accessories">
                 <span class="accessory-name">{{accessory.name}}</span>
                 <strong class="accessory-price">{{accessory.price | currency}}</strong>
